@@ -7,12 +7,12 @@
 #include <catch2/catch.hpp>
 #include <utils.hpp>
 #include <wasm_config.hpp>
-#include <eosio/vm/backend.hpp>
+#include <arisen/vm/backend.hpp>
 
 #define ONLY_FUNCTION_IMPORTS 0
 
-using namespace eosio;
-using namespace eosio::vm;
+using namespace arisen;
+using namespace arisen::vm;
 extern wasm_allocator wa;
 
 BACKEND_TEST_CASE( "Testing wasm <elem_0_wasm>", "[elem_0_wasm_tests]" ) {

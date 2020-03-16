@@ -1,14 +1,14 @@
 #include <iostream>
 #include <vector>
 
-#include <eosio/vm/backend.hpp>
-#include <eosio/vm/watchdog.hpp>
+#include <arisen/vm/backend.hpp>
+#include <arisen/vm/watchdog.hpp>
 
 #include "utils.hpp"
 #include <catch2/catch.hpp>
 
-using namespace eosio;
-using namespace eosio::vm;
+using namespace arisen;
+using namespace arisen::vm;
 
 extern wasm_allocator wa;
 

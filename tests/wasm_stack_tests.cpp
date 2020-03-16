@@ -1,3 +1,3 @@
 #include <catch2/catch.hpp>
-#include <eosio/vm/allocator.hpp>
-#include <eosio/vm/wasm
+#include <arisen/vm/allocator.hpp>
+#include <arisen/vm/wasm

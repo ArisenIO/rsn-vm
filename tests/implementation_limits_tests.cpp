@@ -7,12 +7,12 @@
 
 #include <catch2/catch.hpp>
 
-#include <eosio/vm/backend.hpp>
+#include <arisen/vm/backend.hpp>
 #include "wasm_config.hpp"
 #include "utils.hpp"
 
-using namespace eosio;
-using namespace eosio::vm;
+using namespace arisen;
+using namespace arisen::vm;
 
 void host_call() {}
 
@@ -24,8 +24,8 @@ wasm_code implementation_limits_wasm_code{
 
 BACKEND_TEST_CASE( "Test call depth", "[call_depth]") {
    wasm_allocator wa;
-   using backend_t = eosio::vm::backend<nullptr_t, TestType>;
-   using rhf_t     = eosio::vm::registered_host_functions<nullptr_t>;
+   using backend_t = arisen::vm::backend<nullptr_t, TestType>;
+   using rhf_t     = arisen::vm::registered_host_functions<nullptr_t>;
    rhf_t::add<nullptr_t, &host_call, wasm_allocator>("env", "host.call");
 
    backend_t bkend(implementation_limits_wasm_code);

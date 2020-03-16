@@ -1122,7 +1122,7 @@ using namespace std;
 const string test_includes = "#include <algorithm>\n#include <vector>\n#include <iostream>\n#include "
                              "<iterator>\n#include <cmath>\n#include <cstdlib>\n#include <catch2/catch.hpp>\n"
                              "#include <utils.hpp>\n#include <wasm_config.hpp>\n#include "
-                             "<eosio/vm/backend.hpp>\n\nusing namespace eosio;\nusing namespace eosio::vm;\n"
+                             "<arisen/vm/backend.hpp>\n\nusing namespace arisen;\nusing namespace arisen::vm;\n"
                              "extern wasm_allocator wa;\n\n";
 const string test_preamble_0 = "using backend_t = backend<std::nullptr_t, TestType>;\n   auto code = backend_t::read_wasm( ";
 const string test_preamble_1 = "backend_t bkend( code );\n   bkend.set_wasm_allocator( &wa );\n   bkend.initialize(nullptr);";

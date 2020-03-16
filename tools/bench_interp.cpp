@@ -1,16 +1,16 @@
-#include <eosio/vm/backend.hpp>
-#include <eosio/vm/error_codes.hpp>
-#include <eosio/vm/watchdog.hpp>
+#include <arisen/vm/backend.hpp>
+#include <arisen/vm/error_codes.hpp>
+#include <arisen/vm/watchdog.hpp>
 
 #include <chrono>
 #include <iostream>
 
-using namespace eosio;
-using namespace eosio::vm;
+using namespace arisen;
+using namespace arisen::vm;
 
 int main(int argc, char** argv) {
    wasm_allocator wa;
-   using backend_t = eosio::vm::backend<nullptr_t>;
+   using backend_t = arisen::vm::backend<nullptr_t>;
 
    if (argc < 2) {
       std::cerr << "Error, no wasm file provided\n";
@@ -34,10 +34,10 @@ int main(int argc, char** argv) {
       auto t4 = std::chrono::high_resolution_clock::now();
       std::cout << "Execution " << std::chrono::duration_cast<std::chrono::nanoseconds>(t4-t3).count() << "\n";
 
-   } catch ( const eosio::vm::exception& ex ) {
+   } catch ( const arisen::vm::exception& ex ) {
       auto t4 = std::chrono::high_resolution_clock::now();
       std::cout << "Execution " << std::chrono::duration_cast<std::chrono::nanoseconds>(t4-t3).count() << "\n";
-      std::cerr << "eos-vm interpreter error\n";
+      std::cerr << "rsn-vm interpreter error\n";
       std::cerr << ex.what() << " : " << ex.detail() <<  "\n";
    }
    return 0;

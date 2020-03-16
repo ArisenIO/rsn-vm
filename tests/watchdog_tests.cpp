@@ -1,10 +1,10 @@
-#include <eosio/vm/watchdog.hpp>
+#include <arisen/vm/watchdog.hpp>
 #include <atomic>
 #include <chrono>
 
 #include <catch2/catch.hpp>
 
-using eosio::vm::watchdog;
+using arisen::vm::watchdog;
 
 TEST_CASE("watchdog interrupt", "[watchdog_interrupt]") {
   std::atomic<bool> okay = false;

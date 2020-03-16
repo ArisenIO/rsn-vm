@@ -1,16 +1,16 @@
-#include <eosio/vm/backend.hpp>
-#include <eosio/vm/error_codes.hpp>
-#include <eosio/vm/host_function.hpp>
-#include <eosio/vm/watchdog.hpp>
+#include <arisen/vm/backend.hpp>
+#include <arisen/vm/error_codes.hpp>
+#include <arisen/vm/host_function.hpp>
+#include <arisen/vm/watchdog.hpp>
 
 #include <iostream>
 
-using namespace eosio;
-using namespace eosio::vm;
+using namespace arisen;
+using namespace arisen::vm;
 
 #include "hello.wasm.hpp"
 
-namespace eosio { namespace vm {
+namespace arisen { namespace vm {
 
    template <>
    struct wasm_type_converter<const char*> : linear_memory_access {
@@ -20,7 +20,7 @@ namespace eosio { namespace vm {
 }}
 
 // example of host function as a raw C style function
-void eosio_assert(bool test, const char* msg) {
+void arisen_assert(bool test, const char* msg) {
    if (!test) {
       std::cout << msg << std::endl;
       throw 0;
@@ -38,7 +38,7 @@ struct example_host_methods {
 };
 
 /**
- * Simple implementation of an interpreter using eos-vm.
+ * Simple implementation of an interpreter using rsn-vm.
  */
 int main(int argc, char** argv) {
    if (argc < 4) {
@@ -48,13 +48,13 @@ int main(int argc, char** argv) {
    // Thread specific `allocator` used for wasm linear memory.
    wasm_allocator wa;
    // Specific the backend with example_host_methods for host functions.
-   using backend_t = eosio::vm::backend<example_host_methods>;
-   using rhf_t     = eosio::vm::registered_host_functions<example_host_methods>;
+   using backend_t = arisen::vm::backend<example_host_methods>;
+   using rhf_t     = arisen::vm::registered_host_functions<example_host_methods>;
 
    // register print_num
    rhf_t::add<nullptr_t, &print_num, wasm_allocator>("env", "print_num");
-   // register eosio_assert
-   rhf_t::add<nullptr_t, &eosio_assert, wasm_allocator>("env", "eosio_assert");
+   // register arisen_assert
+   rhf_t::add<nullptr_t, &arisen_assert, wasm_allocator>("env", "arisen_assert");
    // register print_name
    rhf_t::add<example_host_methods, &example_host_methods::print_name, wasm_allocator>("env", "print_name");
    // finally register memset
@@ -77,6 +77,6 @@ int main(int argc, char** argv) {
       bkend(&ehm, "env", "apply", (uint64_t)std::atoi(argv[1]), (uint64_t)std::atoi(argv[2]),
             (uint64_t)std::atoi(argv[3]));
 
-   } catch (...) { std::cerr << "eos-vm interpreter error\n"; }
+   } catch (...) { std::cerr << "rsn-vm interpreter error\n"; }
    return 0;
 }

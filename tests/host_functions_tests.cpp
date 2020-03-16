@@ -7,30 +7,30 @@
 
 #include <catch2/catch.hpp>
 
-#include <eosio/vm/backend.hpp>
+#include <arisen/vm/backend.hpp>
 #include "wasm_config.hpp"
 #include "utils.hpp"
 
-using namespace eosio;
-using namespace eosio::vm;
+using namespace arisen;
+using namespace arisen::vm;
 
 // host functions that are C-style functions
 // wasm hex
-/* Code used to generate test, compile with eosio-cpp v1.6.2 with minor manual edits to remove unneeded imports
+/* Code used to generate test, compile with arisen-cpp v1.6.2 with minor manual edits to remove unneeded imports
  * extern "C" {
       struct state_t { float f; int i; };
-      [[eosio::wasm_import]]
+      [[arisen::wasm_import]]
       void c_style_host_function_0();
-      [[eosio::wasm_import]]
+      [[arisen::wasm_import]]
       void c_style_host_function_1(int);
-      [[eosio::wasm_import]]
+      [[arisen::wasm_import]]
       void c_style_host_function_2(int, int);
-      [[eosio::wasm_import]]
+      [[arisen::wasm_import]]
       void c_style_host_function_3(int, float);
-      [[eosio::wasm_import]]
+      [[arisen::wasm_import]]
       void c_style_host_function_4(const state_t&);
 
-      [[eosio::wasm_entry]]
+      [[arisen::wasm_entry]]
       void apply(unsigned long long a, unsigned long long b, unsigned long long c) {
          if (a == 0)
             c_style_host_function_0(); 
@@ -85,7 +85,7 @@ void c_style_host_function_4(const state_t& ss) {
 // - wasm1/wasm2 mixed -> native -> exit wasm2
 
 
-namespace eosio { namespace vm {
+namespace arisen { namespace vm {
    template<typename T>
    struct wasm_type_converter<T*> {
       static T* from_wasm(void* val) {
@@ -187,8 +187,8 @@ struct init_backend {
    auto call(A&&... a) { return bkend.call(_host, static_cast<A&&>(a)...); }
    decltype(auto) get_context() { return bkend.get_context(); }
 
-   using backend_t = eosio::vm::backend<Host, Impl>;
-   using rhf_t     = eosio::vm::registered_host_functions<Host>;
+   using backend_t = arisen::vm::backend<Host, Impl>;
+   using rhf_t     = arisen::vm::registered_host_functions<Host>;
    wasm_allocator wa;
    backend_t bkend{host_functions_tests_1_code};
    Host * _host;
@@ -350,8 +350,8 @@ BACKEND_TEST_CASE( "Test host function results", "[host_functions_results]" ) {
 
 BACKEND_TEST_CASE( "Test C-style host function system", "[C-style_host_functions_tests]") { 
    wasm_allocator wa;
-   using backend_t = eosio::vm::backend<nullptr_t, TestType>;
-   using rhf_t     = eosio::vm::registered_host_functions<nullptr_t>;
+   using backend_t = arisen::vm::backend<nullptr_t, TestType>;
+   using rhf_t     = arisen::vm::registered_host_functions<nullptr_t>;
    rhf_t::add<nullptr_t, &c_style_host_function_0, wasm_allocator>("env", "c_style_host_function_0");
    rhf_t::add<nullptr_t, &c_style_host_function_1, wasm_allocator>("env", "c_style_host_function_1");
    rhf_t::add<nullptr_t, &c_style_host_function_2, wasm_allocator>("env", "c_style_host_function_2");
@@ -419,7 +419,7 @@ struct stateful_conversion {
    stateful_conversion(const stateful_conversion&) = delete;
 };
 
-namespace eosio { namespace vm {
+namespace arisen { namespace vm {
 
    template<>
    struct wasm_type_converter<has_stateful_conversion> {
@@ -468,7 +468,7 @@ struct multi_converter {
    multi_converter(const multi_converter&) = delete;
 };
 
-namespace eosio { namespace vm {
+namespace arisen { namespace vm {
 
    template<>
    struct wasm_type_converter< ::has_multi_converter> {

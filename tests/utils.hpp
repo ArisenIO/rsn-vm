@@ -6,8 +6,8 @@
 #include <iterator>
 #include <string>
 #include <vector>
-#include <eosio/vm/stack_elem.hpp>
-#include <eosio/vm/utils.hpp>
+#include <arisen/vm/stack_elem.hpp>
+#include <arisen/vm/utils.hpp>
 
 struct type_converter32 {
    union {
@@ -43,15 +43,15 @@ T bit_cast(const U& u) {
 }
 
 
-inline bool check_nan(const std::optional<eosio::vm::operand_stack_elem>& v) {
-   return visit(eosio::vm::overloaded{[](eosio::vm::i32_const_t){ return false; },
-                                      [](eosio::vm::i64_const_t){ return false; },
-                                      [](eosio::vm::f32_const_t f) { return std::isnan(f.data.f); },
-                                      [](eosio::vm::f64_const_t f) { return std::isnan(f.data.f); }}, *v);
+inline bool check_nan(const std::optional<arisen::vm::operand_stack_elem>& v) {
+   return visit(arisen::vm::overloaded{[](arisen::vm::i32_const_t){ return false; },
+                                      [](arisen::vm::i64_const_t){ return false; },
+                                      [](arisen::vm::f32_const_t f) { return std::isnan(f.data.f); },
+                                      [](arisen::vm::f64_const_t f) { return std::isnan(f.data.f); }}, *v);
 }
 
 #define BACKEND_TEST_CASE(name, tags) \
-  TEMPLATE_TEST_CASE(name, tags, eosio::vm::jit, eosio::vm::interpreter)
+  TEMPLATE_TEST_CASE(name, tags, arisen::vm::jit, arisen::vm::interpreter)
 
 inline std::vector<uint8_t> read_wasm(const std::string& fname) {
    std::ifstream wasm_file(fname, std::ios::binary);

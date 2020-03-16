@@ -1,5 +1,5 @@
-#include <eosio/vm/error_codes.hpp>
-#include <eosio/vm/outcome.hpp>
+#include <arisen/vm/error_codes.hpp>
+#include <arisen/vm/outcome.hpp>
 
 #include <catch2/catch.hpp>
 
@@ -8,8 +8,8 @@
 #include <string_view>
 #include <type_traits>
 
-using namespace eosio;
-using namespace eosio::vm;
+using namespace arisen;
+using namespace arisen::vm;
 
 TEST_CASE("Testing error_codes", "[error_codes_tests]") {
    {

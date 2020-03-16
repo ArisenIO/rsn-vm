@@ -1,20 +1,20 @@
 // Code used to generate this wasm
-// compile with eosio-cpp -o hello.wasm hello.cpp
-//#include <eosio/eosio.hpp>
-//#include <eosio/print.hpp>
+// compile with arisen-cpp -o hello.wasm hello.cpp
+//#include <arisen/arisen.hpp>
+//#include <arisen/print.hpp>
 //
 // extern "C" {
-//[[eosio::wasm_import]] void print_name(const char*);
-//[[eosio::wasm_import]] void print_num(uint64_t);
+//[[arisen::wasm_import]] void print_name(const char*);
+//[[arisen::wasm_import]] void print_num(uint64_t);
 //
 // void apply(uint64_t a, uint64_t b, uint64_t c)
 //{
 //    print_num(a);
 //    print_num(b);
 //    print_num(c);
-//    eosio::check(b == c, "Failure B != C");
+//    arisen::check(b == c, "Failure B != C");
 //    for (uint64_t i = 0; i < a; i++)
-//        print_name("eos-vm");
+//        print_name("rsn-vm");
 //}
 //}
 
